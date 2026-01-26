@@ -1,4 +1,5 @@
 use rand::{self, Rng};
+use std::cmp::Ordering;
 use std::io::stdin;
 
 fn main() {
@@ -21,10 +22,12 @@ fn main() {
             .expect("error while converting to int");
         tries += 1;
         println!("Current number of tries : {}", tries);
-        if result == rng {
-            debounce = true;
-        } else {
-            println!("Wrong answer");
+
+        // match is a sort of enhanced switch, very useful !
+        match result.cmp(&rng) {
+            Ordering::Less => println!("too low !"),
+            Ordering::Greater => println!("too high !"),
+            Ordering::Equal => debounce = true,
         }
     }
     println!("Good job ! You found the number that was : {}", rng);
