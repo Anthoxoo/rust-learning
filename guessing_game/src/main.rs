@@ -16,7 +16,7 @@ fn main() {
             .read_line(&mut answer)
             .expect("Error while reading the line");
 
-        let result: i32 = answer
+        let answer: i32 = answer
             .trim()
             .parse()
             .expect("error while converting to int");
@@ -24,7 +24,7 @@ fn main() {
         println!("Current number of tries : {}", tries);
 
         // match is a sort of enhanced switch, very useful !
-        match result.cmp(&rng) {
+        match answer.cmp(&rng) {
             Ordering::Less => println!("too low !"),
             Ordering::Greater => println!("too high !"),
             Ordering::Equal => debounce = true,
