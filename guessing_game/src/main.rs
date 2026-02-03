@@ -7,8 +7,7 @@ fn main() {
     let rng = rand::thread_rng().gen_range(0..10);
     println!("random : {}", rng);
     let mut tries: u16 = 0;
-    let mut debounce: bool = false;
-    while !debounce {
+    loop {
         println!("Choose a number between 0 and 10");
         let mut answer = String::new();
 
@@ -27,7 +26,7 @@ fn main() {
         match answer.cmp(&rng) {
             Ordering::Less => println!("too low !"),
             Ordering::Greater => println!("too high !"),
-            Ordering::Equal => debounce = true,
+            Ordering::Equal => break,
         }
     }
     println!("Good job ! You found the number that was : {}", rng);
