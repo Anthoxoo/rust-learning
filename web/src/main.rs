@@ -1,23 +1,26 @@
-use axum::{Router, routing::get};
-use std::fs;
+use info_sys;
+fn main() {
+    let temperature: f32 = info_sys::get_celcius_temperature();
+    println!("The temperature is at {temperature}°C");
 
-#[tokio::main]
-async fn main() {
-    let temperature: f32 = get_celcius_temperature();
-    // build our application with a single route
-    //let app = Router::new().route("/", get(|| async { "The temperature is currently at {}", temperature }));
+    let ram = info_sys::get_ram_usage();
+    println!(
+        "Total memory : {}mo, Free memory : {}mo, Used memory : {}mo",
+        ram.total / 1024,
+        ram.free / 1024,
+        ram.used / 1024
+    );
 
-    // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
-}
-
-fn get_celcius_temperature() -> f32 {
-    let path: String = String::from("/sys/class/thermal/thermal_zone0");
-    let raw_temperature = fs::read_to_string(path).expect("Error while reading the file");
-    let final_temperature: f32 = raw_temperature
-        .trim()
-        .parse()
-        .expect("error while converting to float");
-    return final_temperature / 1000.0;
+    let storage = info_sys::get_storage_info();
+    let free_disk_pourcentage = (storage.free * 100) / storage.total;
+    let used_disk_pourcentage = (storage.used * 100) / storage.total;
+    const KB_TO_GO: u64 = 1024 * 1024;
+    println!(
+        "Total disk : {}Go, Free disk : {}Go, Free disk {}%, Used disk {}Go, Used disk {}%",
+        storage.total / KB_TO_GO,
+        storage.free / KB_TO_GO,
+        free_disk_pourcentage,
+        storage.used / KB_TO_GO,
+        used_disk_pourcentage
+    )
 }

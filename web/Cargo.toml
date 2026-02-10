@@ -5,4 +5,7 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.8"
+fs = "0.0.5"
+use = "0.0.1-pre.0"
 tokio = { version = "1.49.0", features = ["macros", "rt-multi-thread"] }
+info_sys = { version = "0.1.0", path = "../info_sys" }
