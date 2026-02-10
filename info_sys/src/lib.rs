@@ -1,7 +1,7 @@
 use std::fs;
 use std::process::Command;
 
-fn get_celcius_temperature() -> f32 {
+pub fn get_celcius_temperature() -> f32 {
     let path: String = String::from("/sys/class/thermal/thermal_zone0/temp");
     let raw_temperature = fs::read_to_string(path).expect("Error while reading the file");
 
@@ -11,12 +11,12 @@ fn get_celcius_temperature() -> f32 {
         .expect("error while converting to float");
     return final_temperature / 1000.0;
 }
-struct RamInfo {
-    total: u32,
-    free: u32,
-    used: u32,
+pub struct RamInfo {
+    pub total: u32,
+    pub free: u32,
+    pub used: u32,
 }
-fn get_ram_usage() -> RamInfo {
+pub fn get_ram_usage() -> RamInfo {
     let path: String = String::from("/proc/meminfo");
     let reader = fs::read_to_string(path).expect("Error while reading the file");
 
@@ -52,12 +52,12 @@ fn get_ram_usage() -> RamInfo {
         used: used_mem,
     };
 }
-struct DiskInfo {
-    total: u64,
-    free: u64,
-    used: u64,
+pub struct DiskInfo {
+    pub total: u64,
+    pub free: u64,
+    pub used: u64,
 }
-fn get_storage_info() -> DiskInfo {
+pub fn get_storage_info() -> DiskInfo {
     let storage_command_output = Command::new("df")
         .arg("-k")
         .arg(".") // shows the main disk
@@ -98,30 +98,4 @@ fn get_storage_info() -> DiskInfo {
         free: available_storage,
         used: used_storage,
     };
-}
-
-fn main() {
-    let temperature: f32 = get_celcius_temperature();
-    println!("The temperature is at {temperature}°C");
-
-    let ram = get_ram_usage();
-    println!(
-        "Total memory : {}mo, Free memory : {}mo, Used memory : {}mo",
-        ram.total / 1024,
-        ram.free / 1024,
-        ram.used / 1024
-    );
-
-    let storage = get_storage_info();
-    let free_disk_pourcentage = (storage.free * 100) / storage.total;
-    let used_disk_pourcentage = (storage.used * 100) / storage.total;
-    const KB_TO_GO: u64 = 1024 * 1024;
-    println!(
-        "Total disk : {}Go, Free disk : {}Go, Free disk {}%, Used disk {}Go, Used disk {}%",
-        storage.total / KB_TO_GO,
-        storage.free / KB_TO_GO,
-        free_disk_pourcentage,
-        storage.used / KB_TO_GO,
-        used_disk_pourcentage
-    )
 }
