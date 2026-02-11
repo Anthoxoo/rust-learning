@@ -164,7 +164,7 @@ pub mod os {
             .expect("Error splitting on the space")
             .parse()
             .expect("Error converting to float");
-        const SEC_TO_HOUR: f64 = 60.0 / 60.0;
+        const SEC_TO_HOUR: f64 = 60.0 * 60.0;
         return uptime_output / SEC_TO_HOUR;
     }
 }
