@@ -12,9 +12,13 @@ or “Add Amir to Sales.” Then, let the user retrieve a list of all people in 
 mod test1;
 use test1::answer;
 
+mod test2;
+use test2::answer2;
+
 fn main() {
     // #![allow(unused)]
-    let v = vec![1, 5, 3, 2, 9, 0, 8, 8]; // v sorted : [0, 1, 2, 3, 5, 8, 8, 9]
-    let (median, mode) = answer(v);
-    println!("median : {median}, mode : {mode}");
+    // let v = vec![1, 5, 3, 2, 9, 0, 8, 8]; // v sorted : [0, 1, 2, 3, 5, 8, 8, 9]
+    // let (median, mode) = answer(v);
+    // println!("median : {median}, mode : {mode}");
+    println!("{}", answer2(String::from("éonjour")));
 }
