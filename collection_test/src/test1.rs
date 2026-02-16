@@ -9,12 +9,14 @@ fn swap_number_vector_i32(list: &mut Vec<i32>, i: usize, j: usize) {
     list[i] = list[j];
     list[j] = tmp;
 }
-fn most_occurence_value(list: &mut Vec<i32>) -> i32 {
+fn most_occurence_value(list: &Vec<i32>) -> i32 {
+    /*the lenght of list must be > 0 */
     let mut map = HashMap::new();
     for i in 0..list.len() {
         let count = map.entry(list[i]).or_insert(0);
         *count += 1;
     }
+
     let mut max_value = map
         .get(&(list[0]))
         .expect("No value has been found at the 0 index of the list vector");
@@ -28,24 +30,23 @@ fn most_occurence_value(list: &mut Vec<i32>) -> i32 {
     return *max_key;
 }
 
-fn selection_sort_i32(list: &mut Vec<i32>) -> &Vec<i32> {
+fn selection_sort_i32(list: &mut Vec<i32>) {
     for i in 0..list.len() {
         let mut min: usize = i;
-        for j in i..list.len() {
+        for j in i + 1..list.len() {
             if list[min] > list[j] {
                 min = j;
             }
         }
         swap_number_vector_i32(list, min, i);
     }
-    return list;
 }
 
 pub fn answer(mut list: Vec<i32>) -> (i32, i32) {
-    let sorted_list = selection_sort_i32(&mut list);
-    let list_lenght: usize = sorted_list.len();
-    let median: i32 = sorted_list[list_lenght / 2];
+    selection_sort_i32(&mut list);
+    let list_lenght: usize = list.len();
+    let median: i32 = list[list_lenght / 2];
 
-    let mode: i32 = most_occurence_value(&mut list);
+    let mode: i32 = most_occurence_value(&list);
     return (median, mode);
 }
