@@ -15,6 +15,6 @@ use test1::answer;
 fn main() {
     // #![allow(unused)]
     let v = vec![1, 5, 3, 2, 9, 0, 8, 8]; // v sorted : [0, 1, 2, 3, 5, 8, 8, 9]
-    let (median, mode) = test1::answer(v);
+    let (median, mode) = answer(v);
     println!("median : {median}, mode : {mode}");
 }
