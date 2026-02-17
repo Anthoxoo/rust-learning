@@ -31,7 +31,7 @@ fn sort_and_print_vec(mut vector: Vec<String>) {
     println!("");
 }
 
-pub fn print_name_per_departement(departement_asked: String, map: &HashMap<String, String>) {
+fn print_name_per_departement(departement_asked: String, map: &HashMap<String, String>) {
     let mut names: Vec<String> = Vec::new();
     let p: String;
     for (name, departement) in map {
@@ -56,7 +56,7 @@ fn print_all_people(map: &HashMap<String, String>) {
     sleep(sleep_time);
 }
 
-pub fn ask_and_add(map: &mut HashMap<String, String>, departement_list: &Vec<String>) {
+fn ask_and_add(map: &mut HashMap<String, String>, departement_list: &Vec<String>) {
     let mut answer_departement = String::new();
     let mut answer_name = String::new();
 
@@ -81,7 +81,7 @@ pub fn ask_and_add(map: &mut HashMap<String, String>, departement_list: &Vec<Str
     sleep(sleep_time);
 }
 
-pub fn ask_and_print(map: &HashMap<String, String>) {
+fn ask_and_print(map: &HashMap<String, String>) {
     let mut answer = String::new();
     println!("What is the name of the departement you want to look people that are into : ");
     stdin()

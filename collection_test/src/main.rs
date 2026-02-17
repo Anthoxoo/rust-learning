@@ -28,26 +28,26 @@ fn main() {
     // let (median, mode) = answer(v);
     // println!("median : {median}, mode : {mode}");
     // println!("{}", answer2(String::from("éonjour")));
-    let mut map: HashMap<String, String> = HashMap::new();
-    let departement_list: Vec<String> = vec![String::from("BatA"), String::from("BatB")];
-    test3::add_name_and_departement(
-        String::from("Bonjour"),
-        String::from("BatA"),
-        &mut map,
-        &departement_list,
-    );
-    test3::add_name_and_departement(
-        String::from("Antoine"),
-        String::from("BatB"),
-        &mut map,
-        &departement_list,
-    );
-    test3::add_name_and_departement(
-        String::from("Au-revoir"),
-        String::from("BatA"),
-        &mut map,
-        &departement_list,
-    );
+    // let mut map: HashMap<String, String> = HashMap::new();
+    // let departement_list: Vec<String> = vec![String::from("BatA"), String::from("BatB")];
+    // test3::add_name_and_departement(
+    //     String::from("Bonjour"),
+    //     String::from("BatA"),
+    //     &mut map,
+    //     &departement_list,
+    // );
+    // test3::add_name_and_departement(
+    //     String::from("Antoine"),
+    //     String::from("BatB"),
+    //     &mut map,
+    //     &departement_list,
+    // );
+    // test3::add_name_and_departement(
+    //     String::from("Au-revoir"),
+    //     String::from("BatA"),
+    //     &mut map,
+    //     &departement_list,
+    // );
     // test3::ask_and_print(&map);
-    answer3(&mut map, &departement_list)
+    // answer3(&mut map, &departement_list)
 }
