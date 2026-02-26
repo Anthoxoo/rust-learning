@@ -1,0 +1,2 @@
+bonjour, hello
+au-revoir, bye bye.
