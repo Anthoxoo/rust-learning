@@ -1,6 +1,6 @@
 pub struct Config {
     pub query: String,
-    pub file_path: String,
+    pub file_target: String,
 }
 
 impl Config {
@@ -10,16 +10,16 @@ impl Config {
             return Err("Usage : 'minigrep [query] [file_path]'");
         }
         let query = args[1].clone();
-        let file_path = args[2].clone();
+        let file_target = args[2].clone();
 
-        return Ok(Config { query, file_path });
+        return Ok(Config { query, file_target });
     }
 }
 
 pub fn search<'a>(query: &str, content: &'a str) -> Vec<&'a str> {
     let mut line_contains_query: Vec<&str> = Vec::new();
     for line in content.lines() {
-        if content.contains(query) {
+        if line.contains(query) {
             line_contains_query.push(line)
         }
     }
