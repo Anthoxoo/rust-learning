@@ -19,10 +19,35 @@ impl Config {
 pub fn search<'a>(query: &str, content: &'a str) -> Vec<&'a str> {
     let mut line_contains_query: Vec<&str> = Vec::new();
     for line in content.lines() {
-        if line.contains(query) {
+        if line.to_lowercase().contains(&query.to_lowercase()) {
             line_contains_query.push(line)
         }
     }
 
     return line_contains_query;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn word_match_test() {
+        let query = "Hello";
+        let content = "As you can see, this is a test.\nHello World!";
+
+        assert_eq!(vec!["Hello World!"], search(query, content));
+    }
+    #[test]
+    fn start_with_min_test() {
+        let query = "hello";
+        let content = "As you can see, this is a test.\nHello World!";
+
+        assert_eq!(vec!["Hello World!"], search(query, content));
+    }
+    #[test]
+    fn no_match_test() {
+        let query = "foo";
+        let content = "As you can see, this is a test.\nHello World!";
+        assert_eq!(Vec::<&str>::new(), search(query, content));
+    }
 }

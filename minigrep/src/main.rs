@@ -11,7 +11,7 @@ fn main() {
 
     match run_program(config.query, config.file_target) {
         Err(e) => {
-            println!("Error running the command : {e}");
+            eprintln!("Error running the command : {e}");
             process::exit(1);
         }
 
